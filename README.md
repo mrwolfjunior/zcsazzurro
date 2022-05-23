@@ -166,4 +166,4 @@ template:
 
 # Credits
 
-Big thanks to (SDeSalve)[https://github.com/sdesalve] and his amazing work.
+Big thanks to [@SDeSalve](https://github.com/sdesalve) and his amazing work.

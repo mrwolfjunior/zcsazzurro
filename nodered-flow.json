@@ -1,0 +1,288 @@
+[
+    {
+        "id": "4b656be551e0113a",
+        "type": "tab",
+        "label": "Pannelli solari",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "1ef3e0a8aede13b3",
+        "type": "inject",
+        "z": "4b656be551e0113a",
+        "name": "",
+        "props": [
+            {
+                "p": "method",
+                "v": "POST",
+                "vt": "str"
+            },
+            {
+                "p": "url",
+                "v": "https://third.zcsazzurroportal.com:19003/",
+                "vt": "str"
+            },
+            {
+                "p": "headers",
+                "v": "{\"Authorization\":\"Zcs YYYYYYY\",\"content-type\":\"application/json\"}",
+                "vt": "json"
+            },
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "900",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"realtimeData\":{\"command\":\"realtimeData\",\"params\":{\"thingKey\":\"ZMXXXXXXXXXXXX\",\"requiredValues\":\"*\"}}}",
+        "payloadType": "json",
+        "x": 110,
+        "y": 160,
+        "wires": [
+            [
+                "0580e3373566f9d2"
+            ]
+        ]
+    },
+    {
+        "id": "0580e3373566f9d2",
+        "type": "http request",
+        "z": "4b656be551e0113a",
+        "name": "",
+        "method": "use",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "senderr": false,
+        "x": 270,
+        "y": 160,
+        "wires": [
+            [
+                "ff85d360bfd6caad"
+            ]
+        ]
+    },
+    {
+        "id": "8890d578bc8c5529",
+        "type": "change",
+        "z": "4b656be551e0113a",
+        "name": "Remove hierarchy",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.realtimeData.params.value[0].ZMXXXXXXXXXXXX",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 670,
+        "y": 120,
+        "wires": [
+            [
+                "28b467a18e10f5f9"
+            ]
+        ]
+    },
+    {
+        "id": "ff85d360bfd6caad",
+        "type": "switch",
+        "z": "4b656be551e0113a",
+        "name": "",
+        "property": "payload.realtimeData.success",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 470,
+        "y": 160,
+        "wires": [
+            [
+                "8890d578bc8c5529"
+            ],
+            [
+                "b77c0d25f2773c2c"
+            ]
+        ]
+    },
+    {
+        "id": "d4efa2451532135a",
+        "type": "inject",
+        "z": "4b656be551e0113a",
+        "name": "Autodiscovery payload",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"unique_id\":\"zcs_inverter\",\"name\":\"ZCS Inverter\",\"icon\":\"mdi:home-lightning-bolt-outline\",\"state_topic\":\"homeassistant/sensor/zcsazzurro/status\",\"value_template\":\"{{ value_json.lastUpdate | as_datetime }}\",\"json_attributes_topic\":\"homeassistant/sensor/zcsazzurro/status\",\"availability_topic\":\"homeassistant/sensor/zcsazzurro/status\",\"availability_template\":\"{{ value_json.status }}\",\"payload_available\":\"online\",\"payload_not_available\":\"offline\"}",
+        "payloadType": "json",
+        "x": 160,
+        "y": 300,
+        "wires": [
+            [
+                "b8b5b83bdf4c020f"
+            ]
+        ]
+    },
+    {
+        "id": "b8b5b83bdf4c020f",
+        "type": "mqtt out",
+        "z": "4b656be551e0113a",
+        "name": "",
+        "topic": "homeassistant/sensor/zcsazzurro/config",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "0bff5a13c83b7b4c",
+        "x": 440,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "019cfe396028a3c8",
+        "type": "mqtt out",
+        "z": "4b656be551e0113a",
+        "name": "",
+        "topic": "homeassistant/sensor/zcsazzurro/status",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "0bff5a13c83b7b4c",
+        "x": 1100,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "b77c0d25f2773c2c",
+        "type": "change",
+        "z": "4b656be551e0113a",
+        "name": "Is offline",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"status\":\"offline\"}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 640,
+        "y": 200,
+        "wires": [
+            [
+                "019cfe396028a3c8"
+            ]
+        ]
+    },
+    {
+        "id": "9a61fb4b896bd80e",
+        "type": "mqtt out",
+        "z": "4b656be551e0113a",
+        "name": "",
+        "topic": "homeassistant/sensor/zcsazzurro/status",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "0bff5a13c83b7b4c",
+        "x": 1100,
+        "y": 120,
+        "wires": [],
+        "info": "Node used to post all the info retrieved from the request"
+    },
+    {
+        "id": "28b467a18e10f5f9",
+        "type": "change",
+        "z": "4b656be551e0113a",
+        "name": "Is online",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.status",
+                "pt": "msg",
+                "to": "online",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 860,
+        "y": 120,
+        "wires": [
+            [
+                "9a61fb4b896bd80e"
+            ]
+        ]
+    },
+    {
+        "id": "0bff5a13c83b7b4c",
+        "type": "mqtt-broker",
+        "name": "mosquitto",
+        "broker": "http://mosquitto.local:1883",
+        "port": "1883",
+        "clientid": "nodered",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    }
+]

@@ -28,7 +28,7 @@ Following what you need before starting:
 template:
   - sensor:
       - name: "Potenza Istantanea"
-        unit_of_measurement: "kWh"
+        unit_of_measurement: "W"
         state: >
           {{ state_attr('sensor.zcs_inverter','powerGenerating') if is_number(state_attr('sensor.zcs_inverter','powerGenerating')) else 0.0 | float }}
         state_class: measurement

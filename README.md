@@ -30,7 +30,7 @@ template:
       - name: "Potenza Istantanea"
         unit_of_measurement: "W"
         state: >
-          {{ state_attr('sensor.zcs_inverter','powerGenerating') if is_number(state_attr('sensor.zcs_inverter','powerGenerating')) else 0.0 | float }}
+          {{ state_attr('sensor.zcs_inverter','powerGenerating') if is_number(state_attr('sensor.zcs_inverter','powerGenerating')) | float }}
         state_class: measurement
         device_class: power
         icon: mdi:solar-power
@@ -38,7 +38,7 @@ template:
       - name: "Batteria"
         unit_of_measurement: "%"
         state: >
-          {{ state_attr('sensor.zcs_inverter','batterySoC') if is_number(state_attr('sensor.zcs_inverter','batterySoC')) else 0 | int }}
+          {{ state_attr('sensor.zcs_inverter','batterySoC') if is_number(state_attr('sensor.zcs_inverter','batterySoC')) | int }}
         state_class: measurement
         device_class: power_factor
         icon: mdi:battery-90
@@ -46,7 +46,7 @@ template:
       - name: "Consumo Giorno Casa"
         unit_of_measurement: "kWh"
         state: >
-          {{ state_attr('sensor.zcs_inverter','energyConsuming') if is_number(state_attr('sensor.zcs_inverter','energyConsuming')) else 0.0 | float }}
+          {{ state_attr('sensor.zcs_inverter','energyConsuming') if is_number(state_attr('sensor.zcs_inverter','energyConsuming')) | float }}
         state_class: measurement
         device_class: energy
         icon: mdi:power-socket-it
@@ -54,7 +54,7 @@ template:
       - name: "Autoconsum Giorno"
         unit_of_measurement: "kWh"
         state: >
-          {{ state_attr('sensor.zcs_inverter','energyAutoconsuming') if is_number(state_attr('sensor.zcs_inverter','energyAutoconsuming')) else 0.0 | float }}
+          {{ state_attr('sensor.zcs_inverter','energyAutoconsuming') if is_number(state_attr('sensor.zcs_inverter','energyAutoconsuming')) | float }}
         state_class: measurement
         device_class: energy
         icon: mdi:power-plug-outline
@@ -62,7 +62,7 @@ template:
       - name: "Scarica"
         unit_of_measurement: "kWh"
         state: >
-          {{ state_attr('sensor.zcs_inverter','energyDischarging') if is_number(state_attr('sensor.zcs_inverter','energyDischarging')) else 0.0 | float }}
+          {{ state_attr('sensor.zcs_inverter','energyDischarging') if is_number(state_attr('sensor.zcs_inverter','energyDischarging')) | float }}
         state_class: measurement
         device_class: energy
         icon: mdi:battery-low
@@ -70,7 +70,7 @@ template:
       - name: "Carica"
         unit_of_measurement: "kWh"
         state: >
-          {{ state_attr('sensor.zcs_inverter','energyCharging') if is_number(state_attr('sensor.zcs_inverter','energyCharging')) else 0.0 | float }}
+          {{ state_attr('sensor.zcs_inverter','energyCharging') if is_number(state_attr('sensor.zcs_inverter','energyCharging')) | float }}
         state_class: measurement
         device_class: energy
         icon: mdi:battery-high
@@ -78,7 +78,7 @@ template:
       - name: "Produzione"
         unit_of_measurement: "kWh"
         state: >
-          {{ state_attr('sensor.zcs_inverter','energyGenerating') if is_number(state_attr('sensor.zcs_inverter','energyGenerating')) else 0.0 | float }}
+          {{ state_attr('sensor.zcs_inverter','energyGenerating') if is_number(state_attr('sensor.zcs_inverter','energyGenerating')) | float }}
         state_class: measurement
         device_class: energy
         icon: mdi:solar-power
@@ -86,7 +86,7 @@ template:
       - name: "Prelievo"
         unit_of_measurement: "kWh"
         state: >
-          {{ state_attr('sensor.zcs_inverter','energyImporting') if is_number(state_attr('sensor.zcs_inverter','energyImporting')) else 0.0 | float }}
+          {{ state_attr('sensor.zcs_inverter','energyImporting') if is_number(state_attr('sensor.zcs_inverter','energyImporting')) | float }}
         state_class: measurement
         device_class: energy
         icon: mdi:transmission-tower
@@ -94,7 +94,7 @@ template:
       - name: "Immissione"
         unit_of_measurement: "kWh"
         state: >
-          {{ state_attr('sensor.zcs_inverter','energyExporting') if is_number(state_attr('sensor.zcs_inverter','energyExporting')) else 0.0 | float }}
+          {{ state_attr('sensor.zcs_inverter','energyExporting') if is_number(state_attr('sensor.zcs_inverter','energyExporting')) | float }}
         state_class: measurement
         device_class: energy
         icon: mdi:solar-power
@@ -103,7 +103,7 @@ template:
       - name: "Produzione Totale"
         unit_of_measurement: "kWh"
         state: >
-          {{ state_attr('sensor.zcs_inverter','energyGeneratingTotal') if is_number(state_attr('sensor.zcs_inverter','energyGeneratingTotal')) else 0.0 | float }}
+          {{ state_attr('sensor.zcs_inverter','energyGeneratingTotal') if is_number(state_attr('sensor.zcs_inverter','energyGeneratingTotal')) | float }}
         state_class: total_increasing
         device_class: energy
         icon: mdi:weather-sunny
@@ -111,7 +111,7 @@ template:
       - name: "Prelievo Totale"
         unit_of_measurement: "kWh"
         state: >
-          {{ state_attr('sensor.zcs_inverter','energyImportingTotal') if is_number(state_attr('sensor.zcs_inverter','energyImportingTotal')) else 0.0 | float }}
+          {{ state_attr('sensor.zcs_inverter','energyImportingTotal') if is_number(state_attr('sensor.zcs_inverter','energyImportingTotal')) | float }}
         state_class: total_increasing
         device_class: energy
         icon: mdi:transmission-tower
@@ -119,7 +119,7 @@ template:
       - name: "Immissione Totale"
         unit_of_measurement: "kWh"
         state: >
-          {{ state_attr('sensor.zcs_inverter','energyExportingTotal') if is_number(state_attr('sensor.zcs_inverter','energyExportingTotal')) else 0.0 | float }}
+          {{ state_attr('sensor.zcs_inverter','energyExportingTotal') if is_number(state_attr('sensor.zcs_inverter','energyExportingTotal')) | float }}
         state_class: total_increasing
         device_class: energy
         icon: mdi:flash-circle
@@ -127,7 +127,7 @@ template:
       - name: "Autoconsum Totale"
         unit_of_measurement: "kWh"
         state: >
-          {{ state_attr('sensor.zcs_inverter','energyAutoconsumingTotal') if is_number(state_attr('sensor.zcs_inverter','energyAutoconsumingTotal')) else 0.0 | float }}
+          {{ state_attr('sensor.zcs_inverter','energyAutoconsumingTotal') if is_number(state_attr('sensor.zcs_inverter','energyAutoconsumingTotal')) | float }}
         state_class: total_increasing
         device_class: energy
         icon: mdi:power-plug-outline
@@ -135,7 +135,7 @@ template:
       - name: "Scarica Totale"
         unit_of_measurement: "kWh"
         state: >
-          {{ state_attr('sensor.zcs_inverter','energyDischargingTotal') if is_number(state_attr('sensor.zcs_inverter','energyDischargingTotal')) else 0.0 | float }}
+          {{ state_attr('sensor.zcs_inverter','energyDischargingTotal') if is_number(state_attr('sensor.zcs_inverter','energyDischargingTotal')) | float }}
         state_class: total_increasing
         device_class: energy
         icon: mdi:battery-low
@@ -143,7 +143,7 @@ template:
       - name: "Carica Totale"
         unit_of_measurement: "kWh"
         state: >
-          {{ state_attr('sensor.zcs_inverter','energyChargingTotal') if is_number(state_attr('sensor.zcs_inverter','energyChargingTotal')) else 0.0 | float }}
+          {{ state_attr('sensor.zcs_inverter','energyChargingTotal') if is_number(state_attr('sensor.zcs_inverter','energyChargingTotal')) | float }}
         state_class: total_increasing
         device_class: energy
         icon: mdi:battery-high

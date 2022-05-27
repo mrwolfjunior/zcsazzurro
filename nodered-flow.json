@@ -140,10 +140,10 @@
         "once": true,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "{\"unique_id\":\"zcs_inverter\",\"name\":\"ZCS Inverter\",\"icon\":\"mdi:home-lightning-bolt-outline\",\"state_topic\":\"homeassistant/sensor/zcsazzurro/status\",\"value_template\":\"{{ value_json.lastUpdate | as_datetime }}\",\"json_attributes_topic\":\"homeassistant/sensor/zcsazzurro/status\",\"availability_topic\":\"homeassistant/sensor/zcsazzurro/status\",\"availability_template\":\"{{ value_json.status }}\",\"payload_available\":\"online\",\"payload_not_available\":\"offline\"}",
+        "payload": "{\"unique_id\":\"zcs_inverter\",\"name\":\"ZCS Inverter\",\"icon\":\"mdi:home-lightning-bolt-outline\",\"state_topic\":\"ha/sensor/zcsazzurro/status\",\"value_template\":\"{{ value_json.lastUpdate | as_datetime }}\",\"json_attributes_topic\":\"ha/sensor/zcsazzurro/status\",\"availability_topic\":\"ha/sensor/zcsazzurro/status\",\"availability_template\":\"{{ value_json.status }}\",\"payload_available\":\"online\",\"payload_not_available\":\"offline\"}",
         "payloadType": "json",
         "x": 160,
-        "y": 300,
+        "y": 260,
         "wires": [
             [
                 "b8b5b83bdf4c020f"
@@ -155,7 +155,7 @@
         "type": "mqtt out",
         "z": "4b656be551e0113a",
         "name": "",
-        "topic": "homeassistant/sensor/zcsazzurro/config",
+        "topic": "ha/sensor/zcsazzurro/config",
         "qos": "",
         "retain": "",
         "respTopic": "",
@@ -165,7 +165,7 @@
         "expiry": "",
         "broker": "0bff5a13c83b7b4c",
         "x": 440,
-        "y": 300,
+        "y": 260,
         "wires": []
     },
     {
@@ -173,7 +173,7 @@
         "type": "mqtt out",
         "z": "4b656be551e0113a",
         "name": "",
-        "topic": "homeassistant/sensor/zcsazzurro/status",
+        "topic": "ha/sensor/zcsazzurro/status",
         "qos": "",
         "retain": "",
         "respTopic": "",
@@ -182,7 +182,7 @@
         "correl": "",
         "expiry": "",
         "broker": "0bff5a13c83b7b4c",
-        "x": 1100,
+        "x": 1140,
         "y": 200,
         "wires": []
     },
@@ -205,7 +205,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 640,
+        "x": 680,
         "y": 200,
         "wires": [
             [
@@ -218,7 +218,7 @@
         "type": "mqtt out",
         "z": "4b656be551e0113a",
         "name": "",
-        "topic": "homeassistant/sensor/zcsazzurro/status",
+        "topic": "ha/sensor/zcsazzurro/status",
         "qos": "",
         "retain": "",
         "respTopic": "",
@@ -227,7 +227,7 @@
         "correl": "",
         "expiry": "",
         "broker": "0bff5a13c83b7b4c",
-        "x": 1100,
+        "x": 1240,
         "y": 120,
         "wires": [],
         "info": "Node used to post all the info retrieved from the request"
@@ -255,6 +255,25 @@
         "y": 120,
         "wires": [
             [
+                "b11cd8f7655e2365"
+            ]
+        ]
+    },
+    {
+        "id": "b11cd8f7655e2365",
+        "type": "function",
+        "z": "4b656be551e0113a",
+        "name": "",
+        "func": "let previousResp = global.get(\"globalVars.previousResponse\");\nlet currentResp = msg.payload;\n\nif(!previousResp) {\n    // First time - set global var\n    global.set(\"globalVars.previousResponse\",currentResp);\n    return msg;\n}\nelse {\n\tif(currentResp.energyChargingTotal >= previousResp.energyChargingTotal &&\n\t\tcurrentResp.energyExportingTotal >= previousResp.energyExportingTotal &&\n\t\tcurrentResp.energyImportingTotal >= previousResp.energyImportingTotal &&\n\t\tcurrentResp.energyConsumingTotal >= previousResp.energyConsumingTotal &&\n\t\tcurrentResp.energyDischargingTotal >= previousResp.energyDischargingTotal &&\n\t\tcurrentResp.energyGeneratingTotal >= previousResp.energyGeneratingTotal &&\n\t\tcurrentResp.energyAutoconsumingTotal >= previousResp.energyAutoconsumingTotal) {\n\n\t\tglobal.set(\"globalVars.previousResponse\",currentResp);\n\t\treturn msg;\n\t}\n\telse {\n\t\tmsg.payload = previousResp;\n\t\treturn msg;\n\t}\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1020,
+        "y": 120,
+        "wires": [
+            [
                 "9a61fb4b896bd80e"
             ]
         ]
@@ -263,7 +282,7 @@
         "id": "0bff5a13c83b7b4c",
         "type": "mqtt-broker",
         "name": "mosquitto",
-        "broker": "http://mosquitto.local:1883",
+        "broker": "http://mosquitto:1883",
         "port": "1883",
         "clientid": "nodered",
         "autoConnect": true,

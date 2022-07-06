@@ -8,46 +8,6 @@
         "env": []
     },
     {
-        "id": "1ef3e0a8aede13b3",
-        "type": "inject",
-        "z": "4b656be551e0113a",
-        "name": "",
-        "props": [
-            {
-                "p": "method",
-                "v": "POST",
-                "vt": "str"
-            },
-            {
-                "p": "url",
-                "v": "https://third.zcsazzurroportal.com:19003/",
-                "vt": "str"
-            },
-            {
-                "p": "headers",
-                "v": "{\"Authorization\":\"Zcs YYYYYYY\",\"content-type\":\"application/json\",\"Client\":\"ZZZZZZZZZ\"}",
-                "vt": "json"
-            },
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "900",
-        "crontab": "",
-        "once": true,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "{\"realtimeData\":{\"command\":\"realtimeData\",\"params\":{\"thingKey\":\"ZMXXXXXXXXXXXX\",\"requiredValues\":\"*\"}}}",
-        "payloadType": "json",
-        "x": 110,
-        "y": 160,
-        "wires": [
-            [
-                "0580e3373566f9d2"
-            ]
-        ]
-    },
-    {
         "id": "0580e3373566f9d2",
         "type": "http request",
         "z": "4b656be551e0113a",
@@ -138,7 +98,7 @@
         "repeat": "",
         "crontab": "",
         "once": true,
-        "onceDelay": 0.1,
+        "onceDelay": "2",
         "topic": "",
         "payload": "{\"unique_id\":\"zcs_inverter\",\"name\":\"ZCS Inverter\",\"icon\":\"mdi:home-lightning-bolt-outline\",\"state_topic\":\"ha/sensor/zcsazzurro/status\",\"value_template\":\"{{ value_json.lastUpdate | as_datetime }}\",\"json_attributes_topic\":\"ha/sensor/zcsazzurro/status\",\"availability_topic\":\"ha/sensor/zcsazzurro/status\",\"availability_template\":\"{{ value_json.status }}\",\"payload_available\":\"online\",\"payload_not_available\":\"offline\"}",
         "payloadType": "json",
@@ -275,6 +235,46 @@
         "wires": [
             [
                 "9a61fb4b896bd80e"
+            ]
+        ]
+    },
+    {
+        "id": "1ef3e0a8aede13b3",
+        "type": "inject",
+        "z": "4b656be551e0113a",
+        "name": "",
+        "props": [
+            {
+                "p": "method",
+                "v": "POST",
+                "vt": "str"
+            },
+            {
+                "p": "url",
+                "v": "https://third.zcsazzurroportal.com:19003/",
+                "vt": "str"
+            },
+            {
+                "p": "headers",
+                "v": "{\"Authorization\":\"Zcs YYYYYYY\",\"content-type\":\"application/json\",\"Client\":\"ZZZZZZZZZ\"}",
+                "vt": "json"
+            },
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "900",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "5",
+        "topic": "",
+        "payload": "{\"realtimeData\":{\"command\":\"realtimeData\",\"params\":{\"thingKey\":\"ZMXXXXXXXXXXXX\",\"requiredValues\":\"*\"}}}",
+        "payloadType": "json",
+        "x": 110,
+        "y": 160,
+        "wires": [
+            [
+                "0580e3373566f9d2"
             ]
         ]
     },

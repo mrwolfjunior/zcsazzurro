@@ -25,7 +25,7 @@
             },
             {
                 "p": "headers",
-                "v": "{\"Authorization\":\"Zcs YYYYYYY\",\"content-type\":\"application/json\"}",
+                "v": "{\"Authorization\":\"Zcs YYYYYYY\",\"content-type\":\"application/json\",\"Client\":\"ZZZZZZZZZ\"}",
                 "vt": "json"
             },
             {

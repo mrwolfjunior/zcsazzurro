@@ -18,6 +18,7 @@ Following what you need before starting:
 2. Open it and replace the following string:
   - "Zcs YYYYYYY" with the key provided by ZCS
   - "ZMXXXXXXXXXXXX" with the serial number placed on the side of the inverter
+  - "ZZZZZZZZZ" with the client code provided by ZCS
 3. Import the flow in your node red instance: top-right menu --> Import --> Follow instruction
 4. Customize the MQTT connection adding your credential: open one of the MQTT node and click on the pencil icon at the end of the "Server" field
 5. Deploy the flow and HA should automatically recognize the entity. The entity has as value the lastUpdate received from the API
